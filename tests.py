@@ -58,7 +58,7 @@ class TestCase(unittest.TestCase):
         self.assertEqual(s_to_num, num,
                          msg='{} is not {}'.format(s_to_num, num))
 
-    def test_num_10(self):
+    def test_num_11(self):
         num = 0.
         s_to_num = task.conv_num('0.')
         self.assertEqual(s_to_num, num,
