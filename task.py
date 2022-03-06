@@ -49,10 +49,11 @@ def conv_num(num_str):
                 if decimal_count == 0:
                     ret = ret*mult + num
 
-                # Move provided num right
+                # Move provided num and mult right
                 else:
                     ret += num*mult
                     mult *= mult
+
             else:
                 return None
 
