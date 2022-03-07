@@ -85,3 +85,117 @@ def leap_year(year):
             return True
     else:
         return False
+
+
+def conv_endian(num, endian='big'):
+  """Function to convert decimal number to hexadecimal(little/big endian)"""
+  num = str(num)
+  is_negative = False
+  hex_num = []
+  pocket = ""
+  result = []
+  str_result = ""
+  
+  if num[0] == '-':
+    is_negative = True
+    num = num[1:]
+
+  num = int(num)
+  bin_num = num_to_bin(num)
+  hex_num = bin_to_hex(bin_num)
+
+  if(len(hex_num)%2) != 0:
+    hex_num.append('0')
+
+  hex_num.reverse()
+  
+  for i in hex_num:
+    if len(pocket) < 2:
+      pocket = pocket+i
+
+    if len(pocket) == 2:
+      result.append(pocket)
+      pocket = ''
+      
+  if endian == 'big':
+    for i in result:
+      str_result = str_result+ i + " "
+
+  elif endian == "little":
+    result.reverse()
+    for i in result:
+      str_result = str_result+ i + " "
+
+  else:
+    return None
+
+  if is_negative == True:
+    str_result = '-'+str_result
+    
+  return str_result
+
+
+
+def num_to_bin(num):
+  """Helper Function to convert decimal to binary"""
+  binn = []
+  while(num > 0):
+    pocket = num%2
+    binn.append(pocket)
+    num = num//2
+  binn.reverse()
+  return binn
+
+
+def bin_to_hex(bin):
+  """Helper Function to convert binary to hexadecimal"""
+  stri = ''.join(str(e) for e in bin)
+  position = []
+  hex = []
+
+  while len(stri) != 0:
+    if len(stri) >= 4:
+      position.append(stri[-4:])
+      stri = stri[:-4]
+
+    if len(stri) < 4 and len(stri) > 0:
+      while len(stri) != 4:
+        stri = "0"+stri
+
+  for i in position:
+    pocket = 0
+    if i[0] == '1':
+      pocket = pocket+8
+
+    if i[1] == '1':
+      pocket = pocket+4
+
+    if i[2] == '1':
+      pocket = pocket+2
+
+    if i[3] == '1':
+      pocket = pocket+1
+
+    pocket = str(pocket)
+    
+    if pocket == '10':
+      pocket = 'A'
+
+    if pocket == '11':
+      pocket = 'B'
+
+    if pocket == '12':
+      pocket = 'C'
+
+    if pocket == '13':
+      pocket = 'D'
+
+    if pocket == '14':
+      pocket = 'E'
+
+    if pocket == '15':
+      pocket = 'F'
+      
+    hex.append(pocket)
+      
+  return hex
