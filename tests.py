@@ -1,5 +1,3 @@
-import unittest
-import task
 from task import my_datetime
 
 
@@ -63,7 +61,6 @@ class MyTestCase(unittest.TestCase):
     def test_datetime_15(self):
         date_return = "01-01-1973"
         self.assertEqual(my_datetime(94694400), date_return)
-
 
 
 if __name__ == '__main__':

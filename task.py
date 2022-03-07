@@ -79,6 +79,3 @@ def leap_year(year):
             return True
     else:
         return False
-
-
-
