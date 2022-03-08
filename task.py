@@ -92,9 +92,9 @@ def conv_endian(num, endian='big'):
     num = str(num)
     is_negative = False
     hex_num = []
-    pocket = ""
     result = []
     str_result = ""
+    is_negative = check_sign(num)
     if num[0] == '-':
         is_negative = True
         num = num[1:]
@@ -107,14 +107,7 @@ def conv_endian(num, endian='big'):
         hex_num.append('0')
 
     hex_num.reverse()
-
-    for i in hex_num:
-        if len(pocket) < 2:
-            pocket = pocket+i
-
-        if len(pocket) == 2:
-            result.append(pocket)
-            pocket = ''
+    result = count_spaces(hex_num)
 
     if endian == 'big':
         for i in result:
@@ -161,39 +154,66 @@ def bin_to_hex(bin):
             stri = "0"+stri
 
     for i in position:
-        pocket = 0
-        if i[0] == '1':
-            pocket = pocket+8
-
-        if i[1] == '1':
-            pocket = pocket+4
-
-        if i[2] == '1':
-            pocket = pocket+2
-
-        if i[3] == '1':
-            pocket = pocket+1
-
+        pocket = compare_bin(i)
         pocket = str(pocket)
 
         if pocket == '10':
             pocket = 'A'
 
-        if pocket == '11':
+        elif pocket == '11':
             pocket = 'B'
 
-        if pocket == '12':
+        elif pocket == '12':
             pocket = 'C'
 
-        if pocket == '13':
+        elif pocket == '13':
             pocket = 'D'
 
-        if pocket == '14':
+        elif pocket == '14':
             pocket = 'E'
 
-        if pocket == '15':
+        elif pocket == '15':
             pocket = 'F'
 
         hex.append(pocket)
 
     return hex
+
+
+def compare_bin(i):
+    pocket = 0
+    if i[0] == '1':
+        pocket = pocket+8
+
+    if i[1] == '1':
+        pocket = pocket+4
+
+    if i[2] == '1':
+        pocket = pocket+2
+
+    if i[3] == '1':
+        pocket = pocket+1
+
+    return pocket
+
+
+def count_spaces(hex_num):
+    pocket = ""
+    result = []
+    for i in hex_num:
+        if len(pocket) < 2:
+            pocket = pocket+i
+
+        if len(pocket) == 2:
+            result.append(pocket)
+            pocket = ''
+
+    return result
+
+
+def check_sign(num):
+    is_negative = False
+    if num[0] == '-':
+        is_negative = True
+        num = num[1:]
+    return is_negative
