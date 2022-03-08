@@ -156,31 +156,14 @@ def bin_to_hex(bin):
     for i in position:
         pocket = compare_bin(i)
         pocket = str(pocket)
-
-        if pocket == '10':
-            pocket = 'A'
-
-        elif pocket == '11':
-            pocket = 'B'
-
-        elif pocket == '12':
-            pocket = 'C'
-
-        elif pocket == '13':
-            pocket = 'D'
-
-        elif pocket == '14':
-            pocket = 'E'
-
-        elif pocket == '15':
-            pocket = 'F'
-
+        pocket = check_letter(pocket)
         hex.append(pocket)
 
     return hex
 
 
 def compare_bin(i):
+    """Helper Function to determine position of 1"""
     pocket = 0
     if i[0] == '1':
         pocket = pocket+8
@@ -198,6 +181,7 @@ def compare_bin(i):
 
 
 def count_spaces(hex_num):
+    """Helper Function to count spaces"""
     pocket = ""
     result = []
     for i in hex_num:
@@ -212,8 +196,32 @@ def count_spaces(hex_num):
 
 
 def check_sign(num):
+    """Helper Function to check sign"""
     is_negative = False
     if num[0] == '-':
         is_negative = True
         num = num[1:]
     return is_negative
+
+
+def check_letter(pocket):
+    """Helper Function to convert high numbers to hex"""
+    if pocket == '10':
+        pocket = 'A'
+
+    elif pocket == '11':
+        pocket = 'B'
+
+    elif pocket == '12':
+        pocket = 'C'
+
+    elif pocket == '13':
+        pocket = 'D'
+
+    elif pocket == '14':
+        pocket = 'E'
+
+    elif pocket == '15':
+        pocket = 'F'
+
+    return pocket
